@@ -1,0 +1,56 @@
+import random
+from random import randint
+from tkinter import *
+from tkinter import messagebox
+
+root = Tk()
+
+root['bg']= '#fafafa'
+root.title('Камень, ножницы, бумага')
+root.geometry('300x250')
+
+canvas = Canvas(root, height = 300, width = 250)
+canvas.pack()
+
+frame = Frame(root, bg = 'pink')
+frame.place(relwidth = 1, relheight = 1)
+
+title = Label(frame, text='Введите действие', bg='gray', font=40)
+title.pack()
+
+loginInput = Entry(frame, bg='white')
+loginInput.pack()
+
+
+def btn_click():
+    a = str(loginInput.get())
+
+    x = random.randint(1, 3)
+    if x == 1:
+        x = 'Камень'
+    elif x == 2:
+        x = 'Ножницы'
+    elif x == 3:
+        x = 'Бумага'
+
+    if a == x:
+        messagebox.showinfo('Ответ', 'Ничья')
+    elif a == "Ножницы" and x == "Бумага":
+        messagebox.showinfo('Ответ', 'Победа! У противника Бумага')
+    elif a == "Ножницы" and x == "Камень":
+        messagebox.showinfo('Ответ', 'Проигрыш, у противника камень')
+    elif a == "Камень" and x == "Ножницы":
+        messagebox.showinfo('Ответ', 'Победа! У противника Ножницы')
+    elif a == "Камень" and x == "Бумага":
+        messagebox.showinfo('Ответ', 'Проигрыш, у противника бумага')
+    elif a == "Бумага" and x == "Камень":
+        messagebox.showinfo('Ответ', 'Победа! У противника Камень')
+    elif a == "Бумага" and x == "Ножницы":
+        messagebox.showinfo('Ответ', 'Проигрыш, у противника ножницы')
+    else:
+        messagebox.showerror('Ошибка!', 'Фигню написал')
+
+btn = Button(frame, text='Результат', bg='yellow', command=btn_click)
+btn.pack()
+
+root.mainloop()
